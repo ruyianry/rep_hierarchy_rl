@@ -27,6 +27,8 @@
     </h4>
 </div>
 
+</div>
+
 ## 📮 News
 Code will be released in a very near future.
 
