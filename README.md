@@ -36,9 +36,9 @@ Code will be released in a very near future.
 If you find our work useful for your research, kindly consider citing our paper:
 ```bibtex
 @inproceedings{hier_rep_rl,
-title={Improving Unsupervised Hierarchical Representation with Reinforcement Learning},
-author={An, Ruyi and Li, Yewen and He, Xu and Gu, Pengjie and Zhao, Mengchen and Li, Dong and Hao, Jianye and An, Bo and Wang, Chaojie and Zhou, Mingyuan},
-booktitle={{CVPR}},
-year={2024}
+  title={Improving Unsupervised Hierarchical Representation with Reinforcement Learning},
+  author={An, Ruyi and Li, Yewen and He, Xu and Gu, Pengjie and Zhao, Mengchen and Li, Dong and Hao, Jianye and An, Bo and Wang, Chaojie and Zhou, Mingyuan},
+  booktitle={{CVPR}},
+  year={2024}
 }
 ```
