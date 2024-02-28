@@ -18,7 +18,7 @@
 </div>
 
 <div>
-    :triangular_flag_on_post: <strong>Accepted to CVPR 2024</strong>
+    🎈 <strong>Accepted to CVPR 2024</strong>
 </div>
 
 <div>
