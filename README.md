@@ -1,8 +1,8 @@
 <div align="center">
 
-<h1>[CVPR'24]Improving Unsupervised Hierarchical Representation with Reinforcement Learning</h1>
+<h1>Improving Unsupervised Hierarchical Representation with Reinforcement Learning</h1>
 
-<!-- Ruyi An, Yewen Li, Xu He, Pengjie Gu, Mengchen Zhao, Dong Li, Jianye HAO, Bo An, Chaojie Wang, Mingyuan Zhou -->
+<!-- Ruyi An, Yewen Li, Xu He, Pengjie Gu, Mengchen Zhao, Dong Li, Jianye HAO, Chaojie Wang, Bo An, Mingyuan Zhou -->
 
 <div>
     Ruyi An&emsp;
@@ -12,8 +12,8 @@
     Mengchen Zhao&emsp;
     Dong Li&emsp;
     Jianye Hao&emsp;
-    Bo An&emsp;
     Chaojie Wang&emsp;
+    Bo An&emsp;
     Mingyuan Zhou
 </div>
 
@@ -23,14 +23,62 @@
 
 <div>
     <h4 align="center">
-        • <a href="https://openreview.net/pdf?id=VHIPgvXrN2" target='_blank'>[pdf]</a> •
+        • <a href="https://personal.ntu.edu.sg/boan/papers/CVPR24.pdf" target='_blank'>[pdf]</a> •
     </h4>
+</div>
+
+<div>
+    If you find our project helpful, kindly consider ⭐ this repo. Thanks! 🖐️
 </div>
 
 </div>
 
 ## 📮 News
-Code will be released in a very near future.
+- Jun. 2024: We will be presenting our paper at CVPR 2024.
+- May 2024: We released the codebase for this project.
+
+## 🛠️ Installation
+### Codes and Environment
+```bash
+# clone this repository
+git clone https://github.com/ruyianry/rep_hierarchy_rl.git
+cd rep_hierarchy_rl
+
+# create a new anaconda environment
+conda create -n rephrl python=3.8 -y
+conda activate rephrl
+
+# install python dependencies
+conda install -y -c pytorch pytorch torchvision torchaudio cudatoolkit=11.8
+pip install -r requirements.txt
+pip install --editable .
+```
+
+Ensure that the CUDA version used by `torch` corresponds to the one on the device.
+
+### Package testing
+```bash
+pytest -v --cov --cov-report=term tests
+```
+Please run the above check to ensure that the code works as expected on your system.
+
+
+## 🏃Training
+The below commands will train a HVAE with reinforcement learning on FashionMNIST and CIFAR-10 datasets.
+
+The dataset will be downloaded automatically if it is not found in the `data` directory via `torchvision.datasets`.
+
+### FashionMNIST
+```bash
+python3 scripts/dvae_run_FashionMNIST_RLQ.py
+```
+
+### CIFAR-10
+```bash
+python3 scripts/dvae_run_CIFAR10_RLQ.py
+```
+
+The other datasets can be trained by modifying the `train_datasets` parameter in the script.
 
 ## 🔝 Citation
 If you find our work useful for your research, kindly consider citing our paper:
@@ -42,3 +90,13 @@ If you find our work useful for your research, kindly consider citing our paper:
   year={2024}
 }
 ```
+
+## 🖖 Acknowledgement
+This implementation is based on the following repositories:
+- [hvae-oodd](https://github.com/JakobHavtorn/hvae-oodd)
+- [biva-pytorch](https://github.com/vlievin/biva-pytorch)
+
+🫡 Salute!
+
+## ☎️ Contact
+Please feel free to reach us out at `ran003😎ntu.edu.sg` should you need any help.
