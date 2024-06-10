@@ -27,7 +27,7 @@
     </h4>
 </div>
 
-<img src="assets/teaser.png" width="800px"/>
+<img src="assets/poster.png" width="800px"/>
 
 <div>
     If you find our project helpful, kindly consider ⭐ this repo. Thanks! 🖐️
