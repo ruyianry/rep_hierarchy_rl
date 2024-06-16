@@ -23,7 +23,7 @@
 
 <div>
     <h4 align="center">
-        • <a href="https://personal.ntu.edu.sg/boan/papers/CVPR24.pdf" target='_blank'>[pdf]</a> •
+        • <a href="https://openaccess.thecvf.com/content/CVPR2024/papers/An_Improving_Unsupervised_Hierarchical_Representation_with_Reinforcement_Learning_CVPR_2024_paper.pdf" target='_blank'>[pdf]</a> •
     </h4>
 </div>
 
