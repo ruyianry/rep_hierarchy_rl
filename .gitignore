@@ -39,6 +39,7 @@ __pycache__
 
 # experiment results and cpt
 model/
+*.ckpt
 
 # internal experiment configs
 *-internal.jsonnet
