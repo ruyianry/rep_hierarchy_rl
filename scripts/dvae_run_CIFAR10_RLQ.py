@@ -161,6 +161,54 @@ args.use_wandb = wandb_available and args.use_wandb
 set_seed(args.seed)
 device = get_device(int(args.device))
 
+# this is the training of HVAE without RL where posterior collapse is a problem
+# replace the method call of train_with_RL() with train() to see the effect of posterior collapse
+def train(epoch):
+    model.train()
+    evaluator = Evaluator(primary_metric="log p(x)", logger=LOGGER, use_wandb=args.use_wandb)
+
+    beta = next(deterministic_warmup)
+    free_nats = next(free_nats_cooldown)
+
+    iterator = tqdm(enumerate(datamodule.train_loader), smoothing=0.9, total=len(datamodule.train_loader), leave=False)
+    for _, (x, _) in iterator:
+        x = x.to(device)
+
+        likelihood_data, stage_datas = model(x, n_posterior_samples=args.train_samples)
+        kl_divergences = [
+            stage_data.loss.kl_elementwise for stage_data in stage_datas if stage_data.loss.kl_elementwise is not None
+        ]
+        loss, elbo, likelihood, kl_divergences = criterion(
+            likelihood_data.likelihood,
+            kl_divergences,
+            samples=args.train_samples,
+            free_nats=free_nats,
+            beta=beta,
+            sample_reduction=args.train_sample_reduction,
+            batch_reduction=None,
+        )
+
+        l = loss.mean()
+        l.backward()
+
+        optimizer.step()
+        optimizer.zero_grad()
+
+        evaluator.update("Train", "elbo", {"log p(x)": elbo})
+        evaluator.update("Train", "likelihoods", {"loss": -loss, "log p(x)": elbo, "log p(x|z)": likelihood})
+        klds = {
+            f"KL z{i+1}": kl
+            for i, kl in enumerate([sd.loss.kl_samplewise for sd in stage_datas if sd.loss.kl_samplewise is not None])
+        }
+        klds["KL(q(z|x), p(z))"] = kl_divergences
+        evaluator.update("Train", "divergences", klds)
+
+    evaluator.update(
+        "Train", "hyperparameters", {"free_nats": [free_nats], "beta": [beta], "learning_rate": [args.learning_rate]}
+    )
+    evaluator.report(epoch * len(datamodule.train_loader))
+    evaluator.log(epoch)
+
 def train_with_RL(epoch, gamma=0.9):
     LOGGER.info("RL (Q-value) training epoch %d", epoch)
     model.train()
