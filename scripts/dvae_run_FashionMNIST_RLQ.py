@@ -177,7 +177,7 @@ def train(epoch):
     for _, (x, _) in iterator:
         x = x.to(device)
 
-        likelihood_data, stage_datas = model(x, n_posterior_samples=args.train_samples)
+        likelihood_data, stage_datas, posteriors = model(x, n_posterior_samples=args.train_samples)
         kl_divergences = [
             stage_data.loss.kl_elementwise for stage_data in stage_datas if stage_data.loss.kl_elementwise is not None
         ]
